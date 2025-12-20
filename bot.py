@@ -1,27 +1,13 @@
-import telebot
-from telebot import types
+from keyboards import start_keyboard, payment_keyboard
+from db import init_db, save_payment, get_photo_id
 from config import TOKEN
-from database import init_db, save_payment, get_photo_id
+import telebot
 import os
 
 bot = telebot.TeleBot(TOKEN)
 
 # Инициализация базы данных
 init_db()
-
-# Функция для создания клавиатуры с кнопкой оплаты
-def payment_keyboard():
-    keyboard = types.InlineKeyboardMarkup()
-    button = types.InlineKeyboardButton(text="Оплатить 1 XTR", pay=True)
-    keyboard.add(button)
-    return keyboard
-
-# Функция для создания клавиатуры с кнопкой "Купить изображение"
-def start_keyboard():
-    keyboard = types.InlineKeyboardMarkup()
-    button = types.InlineKeyboardButton(text="Купить изображение", callback_data="buy_image")
-    keyboard.add(button)
-    return keyboard
 
 # Обработчик команды /start
 @bot.message_handler(commands=['start'])
@@ -85,4 +71,4 @@ def handle_pay_support(message):
     )
 
 # Запуск бота
-bot.polling()
+bot.infinity_polling(interval=0)
