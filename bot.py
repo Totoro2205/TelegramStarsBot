@@ -2,6 +2,7 @@ from keyboards import start_keyboard, payment_keyboard
 from db import init_db, save_payment, get_photo_id
 from config import TOKEN
 import telebot
+from  telebot import types
 import os
 
 bot = telebot.TeleBot(TOKEN)
@@ -67,7 +68,7 @@ def handle_pay_support(message):
     bot.send_message(
         message.chat.id,
         "Покупка изображения не подразумевает возврат средств. "
-        "Если у вас есть вопросы, пожалуйста, свяжитесь с нами."
+        "Если у вас есть вопросы, пожалуйста, свяжитесь со мной @king_tri_ton."
     )
 
 # Запуск бота
